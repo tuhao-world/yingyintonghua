@@ -40,15 +40,14 @@ Rectangle{
             text: '打开控制台'
             onClicked: {
                 webview.devToolsView.visible = !webview.devToolsView.visible
+                mr.visible = !mr.visible
             }
         }
 
 
 
         Image{
-
           source: fileObject.source
-
           width: 100
           height: 50
         }
@@ -76,7 +75,6 @@ Rectangle{
         }
 
 
-
         Text{
             id:tvPath
             visible: false
@@ -101,22 +99,13 @@ Rectangle{
             console.log("onNavigationRequested加载新地址"+request.url)
             url = request.requestedUrl
         }
-
-
     }
-
-
-
-
-
-
-
-
 
 
     Rectangle{
 
         id:mr
+        visible: false
         anchors.top: parent.top
         anchors.right: parent.right
         height: parent.height
