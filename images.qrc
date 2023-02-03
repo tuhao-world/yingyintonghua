@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/test.jpg</file>
+        <file>images/workbench-login-bg.png</file>
+        <file>images/wechat.png</file>
+        <file>images/wx-code.jpg</file>
+        <file>images/wx-code-bg.png</file>
+        <file>images/login_top_logo.png</file>
+        <file>images/app_logo.png</file>
+    </qresource>
+</RCC>

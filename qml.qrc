@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>user/LoginView.qml</file>
+        <file>common/WindowDialog.qml</file>
+        <file>common/WidgetDialog.qml</file>
+        <file>web/WebView.qml</file>
+        <file>common/ResizableRectangle.qml</file>
+    </qresource>
+</RCC>
