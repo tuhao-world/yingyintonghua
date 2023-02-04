@@ -44,8 +44,6 @@ Rectangle{
             }
         }
 
-
-
         Image{
           source: fileObject.source
           width: 100
