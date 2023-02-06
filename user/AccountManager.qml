@@ -28,7 +28,21 @@ Row{
     Rectangle{
         width: 200
         height: parent.height
+
         color: "red"
+        Button{
+
+            anchors.bottom: parent.bottom
+
+
+            width: parent.width
+
+            text: "返回主页面"
+            onClicked: {
+                rootView.pop()
+            }
+        }
+
     }
 
 
