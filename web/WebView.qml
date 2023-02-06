@@ -1,4 +1,3 @@
-
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
@@ -14,9 +13,19 @@ import FileObject 1.0
 Rectangle{
     anchors.fill: parent
 
+    property StackView rootView
+
 
     Row{
         id:contr
+
+        Button{
+            text: '返回主页面'
+            onClicked: {
+                rootStack.pop()
+            }
+        }
+
         Button{
             text: '后退'
             onClicked: {
@@ -43,13 +52,6 @@ Rectangle{
                 mr.visible = !mr.visible
             }
         }
-
-        Image{
-          source: fileObject.source
-          width: 100
-          height: 50
-        }
-
 
 
         FileObject{
@@ -78,28 +80,86 @@ Rectangle{
             visible: false
             text: "文件路径"+fileObject.source
         }
+
+
+        Button{
+            text: "添加标签页"
+            onClicked: {
+                var count = tabBar.count;
+
+                var tab = tabButton.createObject(tabBar, {text: "Tab " + tabBar.count,index:count})
+
+                tabBar.addItem(tab)
+
+                tabBar.setCurrentIndex(count)
+
+                tabBar.addItem(tab)
+
+
+
+
+            }
+        }
     }
+
+
+
+    //加载进度
+    ProgressBar {
+        id:pro
+            from: 0.0  //起始值
+            to: 100  //终点值
+            value: {
+                console.log("加载进度"+webview.loadProgress)
+                webview.loadProgress
+            }  //当前进度值
+            anchors.top: contr.bottom
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: 5
+        }
+
+
+
 
     WebEngineView {
         id:webview
-        anchors.top: contr.bottom
+
+        anchors.top: pro.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
+
+
         url: "https://www.baidu.com/"
+
         settings.pluginsEnabled: true
+
         devToolsView: devToolsView
+
+        //WebEngineNavigationRequest.navigationType: 1
+
+        //点击其他链接
         onNewViewRequested: {
-            console.log("加载新地址"+request.requestedUrl)
+            console.log("打开方式:"+request.destination)
+            //request.openIn(webview)
             url = request.requestedUrl
         }
         onNavigationRequested: {
-            console.log("onNavigationRequested加载新地址"+request.url)
-            url = request.requestedUrl
+
+
+            console.log("onNavigationRequested加载新地址"+request.navigationType)
+            //url = request.requestedUrl
+            //request.openIn(webview)
         }
+
     }
 
 
+
+
+    //控制台
     Rectangle{
 
         id:mr
@@ -113,6 +173,7 @@ Rectangle{
             id: devToolsView
             visible: false
             //inspectedView: 0
+
             anchors.fill: parent
             onNewViewRequested: function(request) {
                 var tab = webview.profile

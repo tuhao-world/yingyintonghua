@@ -55,6 +55,7 @@ OBJECTS_DIR   = ./
 SOURCES       = ../fileobject.cpp \
 		../main.cpp main_qml.cpp \
 		web_WebView_qml.cpp \
+		user_AccountManager_qml.cpp \
 		user_LoginView_qml.cpp \
 		common_WindowDialog_qml.cpp \
 		common_ResizableRectangle_qml.cpp \
@@ -66,6 +67,7 @@ OBJECTS       = fileobject.o \
 		main.o \
 		main_qml.o \
 		web_WebView_qml.o \
+		user_AccountManager_qml.o \
 		user_LoginView_qml.o \
 		common_WindowDialog_qml.o \
 		common_ResizableRectangle_qml.o \
@@ -253,6 +255,7 @@ DIST          = ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_pre.p
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt_config.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_post.prf \
+		../.qmake.stash \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/toolchain.prf \
@@ -484,6 +487,7 @@ Makefile: ../quick02.pro ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/sdk.prf \
 		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/toolchain.prf \
@@ -705,6 +709,7 @@ Makefile: ../quick02.pro ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/sdk.prf:
 ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/toolchain.prf:
@@ -774,7 +779,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.qml ../web/WebView.qml ../user/LoginView.qml ../common/WindowDialog.qml ../common/ResizableRectangle.qml ../common/WidgetDialog.qml $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.qml ../web/WebView.qml ../user/AccountManager.qml ../user/LoginView.qml ../common/WindowDialog.qml ../common/ResizableRectangle.qml ../common/WidgetDialog.qml $(DISTDIR)/
 	$(COPY_FILE) --parents ../qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
@@ -789,6 +794,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r quick02.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -805,9 +811,9 @@ check: first
 
 benchmark: first
 
-compiler_qmlcache_make_all: main_qml.cpp web_WebView_qml.cpp user_LoginView_qml.cpp common_WindowDialog_qml.cpp common_ResizableRectangle_qml.cpp common_WidgetDialog_qml.cpp
+compiler_qmlcache_make_all: main_qml.cpp web_WebView_qml.cpp user_AccountManager_qml.cpp user_LoginView_qml.cpp common_WindowDialog_qml.cpp common_ResizableRectangle_qml.cpp common_WidgetDialog_qml.cpp
 compiler_qmlcache_clean:
-	-$(DEL_FILE) main_qml.cpp web_WebView_qml.cpp user_LoginView_qml.cpp common_WindowDialog_qml.cpp common_ResizableRectangle_qml.cpp common_WidgetDialog_qml.cpp
+	-$(DEL_FILE) main_qml.cpp web_WebView_qml.cpp user_AccountManager_qml.cpp user_LoginView_qml.cpp common_WindowDialog_qml.cpp common_ResizableRectangle_qml.cpp common_WidgetDialog_qml.cpp
 main_qml.cpp: ../main.qml \
 		../../../Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen
 	/Users/hh/Documents/Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen --resource=/Users/hh/Documents/qtProject/yingyintonghua/qml.qrc -o main_qml.cpp ../main.qml
@@ -815,6 +821,10 @@ main_qml.cpp: ../main.qml \
 web_WebView_qml.cpp: ../web/WebView.qml \
 		../../../Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen
 	/Users/hh/Documents/Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen --resource=/Users/hh/Documents/qtProject/yingyintonghua/qml.qrc -o web_WebView_qml.cpp ../web/WebView.qml
+
+user_AccountManager_qml.cpp: ../user/AccountManager.qml \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen
+	/Users/hh/Documents/Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen --resource=/Users/hh/Documents/qtProject/yingyintonghua/qml.qrc -o user_AccountManager_qml.cpp ../user/AccountManager.qml
 
 user_LoginView_qml.cpp: ../user/LoginView.qml \
 		../../../Qt5.14.2/5.14.2/clang_64/bin/qmlcachegen
@@ -909,6 +919,9 @@ main_qml.o: main_qml.cpp
 
 web_WebView_qml.o: web_WebView_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o web_WebView_qml.o web_WebView_qml.cpp
+
+user_AccountManager_qml.o: user_AccountManager_qml.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o user_AccountManager_qml.o user_AccountManager_qml.cpp
 
 user_LoginView_qml.o: user_LoginView_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o user_LoginView_qml.o user_LoginView_qml.cpp

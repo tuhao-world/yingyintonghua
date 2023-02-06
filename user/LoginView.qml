@@ -91,6 +91,8 @@ Rectangle{
             //height: root.height
             currentIndex: (loginType==0||loginType==1)?0:1
 
+
+
             //手机号账号登录相关view
             Column{
 
